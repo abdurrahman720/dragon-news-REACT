@@ -8,7 +8,7 @@ const BrandCarousel = () => {
         <Carousel>
       <Carousel.Item>
         <img
-          className="d-block w-100"
+          className="d-block w-100 h-25"
           src={Brand1}
           alt="First slide"
         />
@@ -19,7 +19,7 @@ const BrandCarousel = () => {
       </Carousel.Item>
       <Carousel.Item>
         <img
-          className="d-block w-100"
+          className="d-block w-100 h-20"
           src={Brand2}
           alt="Second slide"
         />
