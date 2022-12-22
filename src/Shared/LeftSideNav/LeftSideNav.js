@@ -20,7 +20,7 @@ const LeftSideNav = () => {
     console.log(categoryName);
     return (
         <div>
-            <h2>All category {categories.length} </h2>
+            <h2>All categories </h2>
             <div>
                 {
                     categories.map(category => <p key={category.id}>

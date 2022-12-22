@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { ButtonGroup, ListGroup } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import {
@@ -9,17 +9,32 @@ import {
   FaWhatsapp,
   FaTwitch,
 } from "react-icons/fa";
+import { AuthContext } from "../../Context/AuthProvider/AuthProvider";
 import BrandCarousel from "../BrandCarousel/BrandCarousel";
 
 const RightSideNav = () => {
+  const { googleSign } = useContext(AuthContext);
+
+  const handleGoogleSignIn =() => {
+    googleSign()
+      .then(userCredential => {
+        const user = userCredential.user;
+        console.log(user);
+      })
+      .catch(err => console.log(err))
+    
+
+  }
+
+
   return (
     <div>
       <ButtonGroup vertical>
-        <Button variant="outline-primary">
+        <Button onClick={handleGoogleSignIn} variant="outline-primary">
           <FaGoogle></FaGoogle> Sign In with Google
         </Button>
         <br />
-        <Button variant="outline-dark">
+        <Button  variant="outline-dark">
           <FaGithub></FaGithub> Sign In with GitHub
         </Button>
       </ButtonGroup>
@@ -40,7 +55,7 @@ const RightSideNav = () => {
           <ListGroup.Item className="mb-2">
             <FaTwitch></FaTwitch> Twitch
           </ListGroup.Item>
-          <ListGroup.Item className="mb-2">Vestibulum at eros</ListGroup.Item>
+         
         </ListGroup>
       </div>
       <div>
