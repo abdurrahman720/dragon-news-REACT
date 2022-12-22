@@ -8,9 +8,20 @@ import { FaUser } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../Context/AuthProvider/AuthProvider";
 import LeftSideNav from "./LeftSideNav/LeftSideNav";
+import Button from 'react-bootstrap/Button';
+import {MdLogout} from 'react-icons/md'
 
 const Header = () => {
-  const { user } = useContext(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
+
+  const handleLogout = () => {
+    logOut()
+      .then(() => { })
+      .catch(err => {
+      console.log(err)
+    })
+    
+  }
 
   return (
     <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
@@ -36,13 +47,16 @@ const Header = () => {
           <Nav>
             <Nav.Link href="#deets">
               {
-                user?.displayName
+                user?.uid && <span>{user.displayName}</span>
               }
             </Nav.Link>
             <Nav.Link eventKey={2} href="#memes">
               {
-                user?.photoURL ? <Image roundedCircle style={{height: '30px'}} src={user?.photoURL}></Image> : <FaUser></FaUser>
-             }
+                user?.uid ? <><Image roundedCircle style={{height: '30px'}} src={user?.photoURL}></Image> 
+               <Button variant="outline-secondary" size='sm' className="ms-2" onClick={handleLogout}> <MdLogout  className="ms-2"></MdLogout></Button> </>
+               : <Link className="" to='/login'> <Button variant="outline-secondary" size='sm'><FaUser></FaUser></Button>{' '}</Link>
+              }
+              
             </Nav.Link>
                   </Nav>
                   <div className="d-md-none">
