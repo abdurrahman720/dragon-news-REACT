@@ -1,12 +1,15 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
 
 const Login = () => {
     const {emailSignIn } = useContext(AuthContext);
-   
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
+    const [error, setError] = useState('');
     const handleSubmit = (event) => {
         event.preventDefault();
        
@@ -16,10 +19,13 @@ const Login = () => {
         emailSignIn(email, password)
             .then(userCredentials => {
                 const user = userCredentials.user;
-                console.log(user)
+                console.log(user);
+                setError('');
+                navigate(from, { replace: true });
             })
             .cacth(err => {
-            console.log(err);
+                console.log(err);
+                setError(err.message);
         })
     }
 
@@ -53,6 +59,9 @@ const Login = () => {
             </Form>
             <p><small>New to this website? Please <Link to="/register">Register</Link> </small></p>
             <p><small>Forgot Password? <button type="button" onClick={handleForgotPassword} className="btn btn-link">Reset Password</button> </small></p>
+            <p>
+                error: {error}
+            </p>
         </div>
     );
 };

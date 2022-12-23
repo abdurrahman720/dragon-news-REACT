@@ -1,7 +1,7 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
 
 
@@ -11,6 +11,10 @@ function Register() {
     const [passwordError, setPasswordError] = useState('');
     const [success, setSuccess] = useState(false);
 
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const from = location.state?.from?.pathname || '/';
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -39,6 +43,7 @@ function Register() {
                 console.log(user);
                 setSuccess(true);
                 updateName(name);
+              navigate(from, {replace:true});
             })
             .catch(err => {
             console.log(err);
