@@ -6,7 +6,7 @@ const LeftSideNav = () => {
     const [categories, setCategories] = useState([]);
     const {categoryName, setCategoryName} = useContext(AuthContext)
     useEffect(() => {
-        fetch('http://localhost:5111/news-categories')
+        fetch('https://dragon-news-server-zeta-one.vercel.app/news-categories')
             .then(res => res.json())
             .then(data => setCategories(data))
         
