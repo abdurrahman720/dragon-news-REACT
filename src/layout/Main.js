@@ -6,7 +6,7 @@ import Header from '../Shared/Header';
 import LeftSideNav from '../Shared/LeftSideNav/LeftSideNav';
 import RightSideNav from '../Shared/RightSideNav/RightSideNav';
 
-const Main = () => {
+const uMain = () => {
     return (
         <div>
             <Header></Header>

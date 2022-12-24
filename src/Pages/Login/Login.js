@@ -55,13 +55,14 @@ const Login = () => {
         </Form.Group>
         <Button variant="primary" type="submit">
        Log In
-        </Button>          
+                </Button>
+                <Form.Text className='text-danger'>
+                    {error}
+                </Form.Text>        
             </Form>
             <p><small>New to this website? Please <Link to="/register">Register</Link> </small></p>
             <p><small>Forgot Password? <button type="button" onClick={handleForgotPassword} className="btn btn-link">Reset Password</button> </small></p>
-            <p>
-                error: {error}
-            </p>
+            
         </div>
     );
 };
